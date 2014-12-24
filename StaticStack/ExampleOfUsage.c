@@ -4,9 +4,6 @@
 
 #include "StaticStack.h"
 
-int retorno(){
-	return 2;
-}
 int main(){
 	staticStack pilha;
 	int i;

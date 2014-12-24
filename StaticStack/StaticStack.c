@@ -1,5 +1,6 @@
 /*
 	Author: Henrique Manoel (Rich-San) - Brazilian from São Paulo-SP
+	Creation date: Date: 24/12/2014
 	Github: https://github.com/Richsan
 
 */
@@ -34,7 +35,7 @@ static void _staticPush(staticStack * const s,Data elem, const int size){
 
 
 }
-Data _staticPop(staticStack * const s){
+static Data _staticPop(staticStack * const s){
 
 	if(staticStackIsEmpty(s))
 	{	printf("\nStack is empty, not possible pops!\n");
@@ -49,7 +50,7 @@ Data _staticPop(staticStack * const s){
 	return s->stackElement[--(s->top)];
 
 }
-Data _staticTop(staticStack const *s){
+static Data _staticTop(staticStack const *s){
 	if(staticStackIsEmpty(s))
 	{
 		printf("\nStack is empty, not possible returns top-element!\n");
@@ -77,8 +78,8 @@ void freeStaticStack(staticStack *s){
 			free(s->stackElement[i]);
 	free(s->stackElement);
 }
-void initializeStaticPush(void (**push)(staticStack *s,Data elem, const int size)){
-	*push = _staticPush;
+_FUNC_PTRPUSH _getPTR_StaticPush(){
+	return _staticPush;
 }
 
 void staticPopGet(staticStack *s, Data variable, unsigned int size){
@@ -87,6 +88,12 @@ void staticPopGet(staticStack *s, Data variable, unsigned int size){
 void staticTopGet(staticStack *s, Data variable, unsigned int size){
 	attribContentVoid(variable,_staticTop(s), size);
 }
-bool staticStackisFull(staticStack const *s){
+bool staticStackIsFull(staticStack const *s){
 	return s->top >= s->maxSize;
+}
+_FUNC_PTRPOP _getPTR_StaticPop(){
+	return _staticPop;
+}
+_FUNC_PTRTOP _getPTR_StaticTop(){
+	return _staticTop;
 }
