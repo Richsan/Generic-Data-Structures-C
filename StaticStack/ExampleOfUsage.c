@@ -39,6 +39,8 @@ int main(){
 
 
 	printf("%.3f\n", staticPop(&pilha, float));
+	
+	freeStaticStack(&pilha);
 
 
 	return 0;
