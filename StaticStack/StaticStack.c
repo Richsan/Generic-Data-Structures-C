@@ -82,10 +82,10 @@ _FUNC_PTRPUSH _getPTR_StaticPush(){
 	return _staticPush;
 }
 
-void staticPopGet(staticStack *s, Data variable, unsigned int size){
+void _staticPopGet(staticStack *s, Data variable, unsigned int size){
 	attribContentVoid(variable,_staticPop(s), size);
 }
-void staticTopGet(staticStack *s, Data variable, unsigned int size){
+void _staticTopGet(staticStack *s, Data variable, unsigned int size){
 	attribContentVoid(variable,_staticTop(s), size);
 }
 bool staticStackIsFull(staticStack const *s){
@@ -97,3 +97,10 @@ _FUNC_PTRPOP _getPTR_StaticPop(){
 _FUNC_PTRTOP _getPTR_StaticTop(){
 	return _staticTop;
 }
+_FUNC_PTRPOPGET _getPTR_StaticPopGet(){
+	return _staticPopGet;
+}
+_FUNC_PTRTOPGET _getPTR_StaticTopGet(){
+	return _staticTopGet;
+}
+

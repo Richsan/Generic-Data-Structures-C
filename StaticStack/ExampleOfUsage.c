@@ -21,8 +21,8 @@ int main(){
 	topValue = staticTop(&pilha, int);
 	printf("ValueTop-attribution: %d\n", topValue);
 	
-	//2-using topGet (need specify the size of value)
-	staticTopGet(&pilha,&topValue, sizeof(topValue));
+	//2-using topGet
+	staticTopGet(&pilha,&topValue);
 	printf("Value-top-topGet: %d\n", topValue);
 
 	//the same for pop values
@@ -30,8 +30,8 @@ int main(){
 	popValue = staticPop(&pilha, int);
 	printf("PopValue-attribution: %d\n", popValue);
 	
-	//2-using popGet (need specify the size of value)
-	staticPopGet(&pilha, &popValue, sizeof(popValue));
+	//2-using popGet
+	staticPopGet(&pilha, &popValue);
 	printf("PopValue-popGet: %d\n", popValue);
 
 	for(i = 0; i < 4; i++)
@@ -39,9 +39,8 @@ int main(){
 
 
 	printf("%.3f\n", staticPop(&pilha, float));
-	
-	freeStaticStack(&pilha);
 
+	freeStaticStack(&pilha);
 
 	return 0;
 }
