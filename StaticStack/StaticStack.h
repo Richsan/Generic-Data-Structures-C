@@ -58,7 +58,7 @@ bool staticStackIsEmpty(staticStack const *s);
 bool staticStackIsFull(staticStack const *s);
 void freeStaticStack(staticStack *s);
 
-//static accesse defines
+//static access definitions
 typedef void (*_FUNC_PTRPUSH)(staticStack *s,Data elem, const int size);
 typedef Data (* _FUNC_PTRPOP)(staticStack * const s);
 typedef Data (* _FUNC_PTRTOP)(staticStack  const * s);
