@@ -38,8 +38,6 @@ static void _enStaticQueue(staticQueue q,void * elem, const unsigned int size);
 static void * _deStaticQueue(staticQueue q);
 static void _deStaticQueueGet(staticQueue q, void * elem, const unsigned int size);
 
-//fazer funcao _deQueueGet e sua macro
-
 //static access definitions
 typedef void   (* _FUNC_PTRENSTATICQUEUE)(staticQueue q,void * elem, const unsigned int size);
 typedef void * (* _FUNC_PTRDESTATICQUEUE)(staticQueue q);
