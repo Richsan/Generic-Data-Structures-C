@@ -13,12 +13,13 @@
 //enStaticQueue = enter static queue (insert)
 //deStaticQueue = delete static queue (remove)
 
+//macro functions
 #define enStaticQueue(Queue, elem) (_getPTR_EnStaticQueue()(Queue, elem, sizeof(*elem)))
 #define deStaticQueue(Queue, type) (*(type *)(_getPTR_DeStaticQueue()(Queue)))
 #define deStaticQueueGet(Queue, elem) (_getPTR_DeStaticQueueGet(Queue,elem,sizeof(*elem)))
-
 #define enStaticQueueLiteral(Queue, literal,type) { type Queue##1 = literal; _getPTR_EnStaticQueue()(Queue,& Queue##1,sizeof( Queue##1)); }
 
+//Queue structure
 struct Staticqueue{
 
 	int qtElements;
@@ -30,18 +31,21 @@ struct Staticqueue{
 typedef struct Staticqueue * staticQueue;
 
 
-void createStaticQueue(staticQueue * q, const int nElem);
+//accessible functions
+void createStaticQueue(staticQueue * const q, const int nElem);
 void destroyStaticQueue(staticQueue q);
 bool staticQueueIsEmpty(staticQueue const q);
 bool staticQueueIsFull(staticQueue const q);
-static void _enStaticQueue(staticQueue q,void * elem, const unsigned int size);
+
+//macro only access functions
+static void _enStaticQueue(staticQueue q,void * const elem, const unsigned int size);
 static void * _deStaticQueue(staticQueue q);
-static void _deStaticQueueGet(staticQueue q, void * elem, const unsigned int size);
+static void _deStaticQueueGet(staticQueue q, void * const elem, const unsigned int size);
 
 //static access definitions
-typedef void   (* _FUNC_PTRENSTATICQUEUE)(staticQueue q,void * elem, const unsigned int size);
+typedef void   (* _FUNC_PTRENSTATICQUEUE)(staticQueue q,void * const elem, const unsigned int size);
 typedef void * (* _FUNC_PTRDESTATICQUEUE)(staticQueue q);
-typedef void   (*_FUNC_PTRDESTATICQUEUEGET)(staticQueue q, void * elem, const unsigned int size);
+typedef void   (*_FUNC_PTRDESTATICQUEUEGET)(staticQueue q, void * const elem, const unsigned int size);
 
 _FUNC_PTRENSTATICQUEUE _getPTR_EnStaticQueue();
 _FUNC_PTRDESTATICQUEUE _getPTR_DeStaticQueue();

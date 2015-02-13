@@ -7,10 +7,29 @@
 
 #include "StaticQueue.h"
 
-void createStaticQueue(staticQueue *q, const int  nElem){
+#define QUEUEEN_FULL_ERROR "\nStaticQueue is Full!Impossible insert Queue's element.\nAborting...\n"
+#define QUEUEDE_EMPTY_ERROR "\nStaticQueue is empty!Impossible remove Queue'element.\nAborting...\n"
+#define MALLOC_ERROR_MSG "\nError: malloc failed at the %s's function.\nAborting...\n" 
+#define CALLOC_ERROR_MSG "\nError: calloc failed at the %s's function.\nAborting...\n"
+
+void createStaticQueue(staticQueue * const q, const int  nElem){
 
 	*q = (staticQueue) malloc(sizeof(struct Staticqueue));
+
+	if(*q == NULL)
+	{
+		printf(MALLOC_ERROR_MSG, "createStaticQueue");
+		exit(1);
+	}
+
 	(*q)->elem = calloc((nElem+ 1) , sizeof(void *));
+
+	if((*q)->elem == NULL)
+	{
+		printf(CALLOC_ERROR_MSG, "createStaticQueue");
+		exit(1);
+	}
+
 	(*q)->qtElements = nElem+1;
 	(*q)->front = 0;
 	(*q)->rear = 0;
@@ -37,16 +56,23 @@ bool staticQueueIsFull(staticQueue const q){
 	return ((q->rear + 1) == (q->front)) || (q->front == 0 && q->rear + 1 == q->qtElements);
 }
 
-static void _enStaticQueue(staticQueue q,void * elem, const unsigned int size){
+static void _enStaticQueue(staticQueue q,void * const elem, const unsigned int size){
 
 	void * content;
 	if(staticQueueIsFull(q))
 	{
-		printf("StaticQueue is Full!Aborting.\n");
+		printf(QUEUEEN_FULL_ERROR);
 		exit(0);
 	}
 
 	content = malloc(size);
+
+	if(content == NULL)
+	{
+		printf(MALLOC_ERROR_MSG, "enStaticQueue");
+		destroyStaticQueue(q);
+		exit(1);
+	}
 
 	attribContentVoid(content,elem,size);
 	
@@ -68,7 +94,7 @@ static void * _deStaticQueue(staticQueue q){
 	
 	if(staticQueueIsEmpty(q))
 	{
-		printf("StaticQueue is Empty! Aborting.\n");
+		printf(QUEUEDE_EMPTY_ERROR);
 		exit(0);
 	}
 
@@ -93,7 +119,7 @@ static void * _deStaticQueue(staticQueue q){
 
 	return elem;	
 }
-static void _deStaticQueueGet(staticQueue q, void * elem, const unsigned int size){
+static void _deStaticQueueGet(staticQueue q, void * const elem, const unsigned int size){
 
 	attribContentVoid(elem,_deStaticQueue(q),size);	
 }

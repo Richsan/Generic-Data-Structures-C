@@ -37,33 +37,39 @@
 		((stack)->top)++;}}
 //------------------------END of macro function----------------------------------------------
 
+
+// stack's structure
 typedef void * Data;
 typedef struct staticStack staticStack;
 struct staticStack
 {
 	
-	int maxSize;
-	int top;
+	unsigned int maxSize;
+	unsigned int top;
 	Data * stackElement;
 	
 };
 
-void initStaticStack(staticStack *s, const int maxSize);
-static void _staticPush(staticStack * const s,Data elem, const int size); //use macro instead of this,also has an option for literals with macro too ,see above
-static Data _staticPop(staticStack * const s); //use macro pop instead of this, never get the memory address, it can be free in next push or pop
-static void _staticPopGet(staticStack *s, Data variable, unsigned int size); //for you pop the value inside a variable
-static Data _staticTop(staticStack const * s); //use macro top instead of this, never get the memory address, it can be free in next push or pop
-static void _staticTopGet(staticStack *s, Data variable, unsigned int size); //for you put the top value inside a variable
+//accessible functions
+void initStaticStack(staticStack * const s, const unsigned int maxSize);
 bool staticStackIsEmpty(staticStack const *s);
 bool staticStackIsFull(staticStack const *s);
-void freeStaticStack(staticStack *s);
+void freeStaticStack(staticStack * const s);
+
+//macro only access functions
+static void _staticPush(staticStack * const s,Data elem, const unsigned int size); //use macro instead of this,also has an option for literals with macro too ,see above
+static Data _staticPop(staticStack * const s); //use macro pop instead of this, never get the memory address, it can be free in next push or pop
+static void _staticPopGet(staticStack *s, Data variable,const unsigned int size); //for you pop the value inside a variable
+static Data _staticTop(staticStack const * s); //use macro top instead of this, never get the memory address, it can be free in next push or pop
+static void _staticTopGet(staticStack *s, Data variable,const unsigned int size); //for you put the top value inside a variable
+
 
 //static access definitions
-typedef void (*_FUNC_PTRPUSH)(staticStack *s,Data elem, const int size);
+typedef void (*_FUNC_PTRPUSH)(staticStack *s,Data elem, const unsigned int size);
 typedef Data (* _FUNC_PTRPOP)(staticStack * const s);
 typedef Data (* _FUNC_PTRTOP)(staticStack  const * s);
-typedef void (* _FUNC_PTRPOPGET)(staticStack *s, Data variable, unsigned int size);
-typedef void (* _FUNC_PTRTOPGET)(staticStack *s, Data variable, unsigned int size);
+typedef void (* _FUNC_PTRPOPGET)(staticStack *s, Data variable,const unsigned int size);
+typedef void (* _FUNC_PTRTOPGET)(staticStack *s, Data variable,const unsigned int size);
 
 _FUNC_PTRPUSH _getPTR_StaticPush();
 _FUNC_PTRPOP _getPTR_StaticPop();

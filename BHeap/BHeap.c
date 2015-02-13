@@ -8,12 +8,12 @@
 #include "BHeap.h"
 
 
-#define MALLOC_ERROR_MSG "Error: malloc failed at the %s's function.\nAborting...\n" 
-#define CALLOC_ERROR_MSG "Error: calloc failed at the %s's function.\nAborting...\n"
-#define SETLENGTH_ERROR_MSG "Error: Has more elements inside the BHeap than the new length that you've specified, impossible set to this lenght.\nAborting...\n"
-#define REALLOC_ERROR_MSG "Error: realloc failed at the %s's function.\nAborting...\n"
-#define FULLHEAP_ERROR_MSG "Error: Heap is full, impossible push element!\nAborting...\n"
-#define EMPTYHEAP_ERROR_MSG "Error: Heap is empty, impossible pop element!\nAborting...\n"
+#define MALLOC_ERROR_MSG "\nError: malloc failed at the %s's function.\nAborting...\n" 
+#define CALLOC_ERROR_MSG "\nError: calloc failed at the %s's function.\nAborting...\n"
+#define SETLENGTH_ERROR_MSG "\nError: Has more elements inside the BHeap than the new length that you've specified, impossible set to this lenght.\nAborting...\n"
+#define REALLOC_ERROR_MSG "\nError: realloc failed at the %s's function.\nAborting...\n"
+#define FULLHEAP_ERROR_MSG "\nError: Heap is full, impossible push element!\nAborting...\n"
+#define EMPTYHEAP_ERROR_MSG "\nError: Heap is empty, impossible pop element!\nAborting...\n"
 
 
 void createBHeap(bHeap * const h,const unsigned int maxSize, conditionFunction func)
