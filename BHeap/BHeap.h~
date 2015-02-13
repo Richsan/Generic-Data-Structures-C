@@ -54,6 +54,7 @@ static void swapBHeap(bHeap h, const unsigned int index1,const unsigned int inde
 static void upBHeap(bHeap h, unsigned int indexNode);
 static void downBHeap(bHeap h,  unsigned int indexNode);
 static unsigned int maxNodeBHeap(bHeap h,const unsigned int index1,const unsigned int index2,const unsigned int index3);
+void printPosOrder(bHeap h, int index);
 
 //static access definition
 typedef void(* _FUNC_PTRPUSHBHEAP)(bHeap h, void * const value,const unsigned int size);

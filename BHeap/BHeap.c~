@@ -209,6 +209,22 @@ bool bHeapIsFull(bHeap h)
 {
    return h->currentSize >= h->maxSize;
 }
+void printPosOrder(bHeap h, int index)
+{
+
+   if(isBHeapLeaf(h,index))
+   {
+      printf("%d ",*(int*)h->data[index]);
+      return;
+   }
+   
+   printPosOrder(h, BHEAP_LEFTCHILD(index));
+   
+   if(BHEAP_RIGHTCHILD(index) < h->currentSize)
+      printPosOrder(h, BHEAP_RIGHTCHILD(index));
+   
+   printf("%d ", *(int *)h->data[index]);
+}
 
 static void  _popBHeapGet(bHeap h, void * const guardVar, const unsigned int size)
 {
