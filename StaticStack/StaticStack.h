@@ -23,7 +23,7 @@
 //A macro for push literals in stack, it's necessary inform literaly the type of the literal
 #define staticPushLiteral(stack, element, type)\
 	{if((stack)->top < (stack)->maxSize)\
-	{\
+	  {\
 		type elem = element;\
 		void * newElement = malloc(sizeof(type));\
 		attribContentVoid(newElement, &elem, sizeof(type));\
@@ -34,7 +34,14 @@
 \
 		(stack)->stackElement[(stack)->top] = newElement;\
 		\
-		((stack)->top)++;}}
+		((stack)->top)++;\
+	   }\
+	   else{\
+		printf("\nStack is full, not possible push!\nAborting\n");\
+		freeStaticStack(stack);\
+		exit(1);\
+	   }\
+	}
 //------------------------END of macro function----------------------------------------------
 
 
@@ -55,6 +62,7 @@ void initStaticStack(staticStack * const s, const unsigned int maxSize);
 bool staticStackIsEmpty(staticStack const *s);
 bool staticStackIsFull(staticStack const *s);
 void freeStaticStack(staticStack * const s);
+void setStaticStackLength(staticStack * const s, unsigned int length);
 
 //macro only access functions
 static void _staticPush(staticStack * const s,Data elem, const unsigned int size); //use macro instead of this,also has an option for literals with macro too ,see above

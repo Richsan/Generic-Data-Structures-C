@@ -6,12 +6,14 @@
 */
 #include "StaticStack.h"
 
-#define STACKPUSH_FULL_ERROR  "\nStack is full, not possible push!\nAborting\n"
-#define STACKPOP_EMPTY_ERROR  "\nStack is empty, not possible pops!\nAborting\n"
-#define STACKTOP_EMPTY_ERROR  "\nStack is empty, not possible returns top-element!\nAborting\n"
-#define MALLOC_ERROR          "\nError: malloc failed at the %s's function.\nAborting...\n"  
-#define CALLOC_ERROR          "Error: calloc failed at the %s's function.\nAborting...\n"
-
+#define STACKPUSH_FULL_ERROR  "\nError: Stack is full, not possible push!\nAborting\n"
+#define STACKPOP_EMPTY_ERROR  "\nError: Stack is empty, not possible pops!\nAborting\n"
+#define STACKTOP_EMPTY_ERROR  "\nError: Stack is empty, not possible returns top-element!\nAborting\n"
+#define MALLOC_ERROR          "\nError: malloc failed at the %s function.\nAborting...\n"  
+#define CALLOC_ERROR          "Error: calloc failed at the %s function.\nAborting...\n"
+#define SETLENGTH_ERROR_MSG "\nError: There's more elements inside the StaticStack than the new length that you've specified, impossible set to this lenght.\nAborting...\n"
+#define REALLOC_ERROR_MSG "\nError: realloc failed at the %s function.\nAborting...\n"
+	
 void initStaticStack(staticStack * const s, const unsigned int maxSize){
 	s->maxSize = maxSize;
 	s->top = 0;
@@ -92,12 +94,48 @@ void freeStaticStack(staticStack * const s){
 	else
 		i = s->top;
 
+	if(s->top == s->maxSize)
+		i--;
+
 	for(; i >= 0; i--)
 		if(s->stackElement[i] != NULL)
 			free(s->stackElement[i]);
 	
 	free(s->stackElement);
 }
+
+void setStaticStackLength(staticStack * const s, unsigned int length)
+{
+	int i;
+	Data *temp;
+	if(length < s->top)
+	{
+ 		printf(SETLENGTH_ERROR_MSG);
+     
+      	freeStaticStack(s);
+      	exit(0);
+	}
+
+	temp = realloc(s->stackElement, length * sizeof(void *));
+
+	if(temp == NULL)
+	{
+	   printf(REALLOC_ERROR_MSG, "setStaticStackLength");
+	   exit(0);
+	}
+	s->stackElement = temp;
+	s->maxSize = length;
+
+	//if the current position memory has not been free yet
+	if(s->top < s->maxSize && s->stackElement[s->top] != NULL)
+		free(s->stackElement[s->top]);
+
+	for(i = s->top; i < s->maxSize; i++)
+		s->stackElement[i] = NULL;
+
+
+}
+
 _FUNC_PTRPUSH _getPTR_StaticPush(){
 	return _staticPush;
 }

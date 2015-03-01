@@ -20,12 +20,20 @@ int main(){
 	i = 3;
 	enStaticQueue(fila, &i);
 	enStaticQueueLiteral(fila, 'c', char);
+
+	setStaticQueueLength(fila, 7);
+	enStaticQueueLiteral(fila, 'h', char);
+	enStaticQueueLiteral(fila, 'i', char);	
 	
 	printf("%f\n",deStaticQueue(fila, float));
 	printf("%d\n",deStaticQueue(fila, int));
 	deStaticQueue(fila,int);
 	printf("%d\n", deStaticQueue(fila, int));
 	printf("%c\n", deStaticQueue(fila,char));
+
+	printf("\nPrinting hi:\n");
+	printf("%c", deStaticQueue(fila,char));
+	printf("%c\n", deStaticQueue(fila,char));	
 
 	/*for(i = 0; i < 3; i++)
 	printf("%d\n", deQueue(fila,int));*/

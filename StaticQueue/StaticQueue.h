@@ -25,6 +25,7 @@ struct Staticqueue{
 	int qtElements;
 	void ** elem;
 	int front, rear;
+	int currentSize;
 	
 };
 
@@ -36,6 +37,7 @@ void createStaticQueue(staticQueue * const q, const int nElem);
 void destroyStaticQueue(staticQueue q);
 bool staticQueueIsEmpty(staticQueue const q);
 bool staticQueueIsFull(staticQueue const q);
+void setStaticQueueLength(staticQueue q, int length);
 
 //macro only access functions
 static void _enStaticQueue(staticQueue q,void * const elem, const unsigned int size);

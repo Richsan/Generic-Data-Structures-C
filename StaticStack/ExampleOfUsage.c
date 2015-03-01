@@ -16,6 +16,16 @@ int main(){
 	for(i = 0; i < 6; i++)
 		staticPush(&pilha, &i); //just for values inside a variable
 
+	//setting the lenght for push more two values
+	setStaticStackLength(&pilha, 10);
+
+	staticPushLiteral(&pilha, 'i', char);
+	staticPushLiteral(&pilha, 'h', char);
+
+	printf("Popping hi :\n");
+	printf("%c",staticPop(&pilha, char));
+	printf("%c\n",staticPop(&pilha, char));
+
 	//two manners for get the top value inside a variable
 	//1 - attribution (need specify the type value)
 	topValue = staticTop(&pilha, int);

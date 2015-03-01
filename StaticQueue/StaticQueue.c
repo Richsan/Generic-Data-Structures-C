@@ -11,6 +11,8 @@
 #define QUEUEDE_EMPTY_ERROR "\nStaticQueue is empty!Impossible remove Queue'element.\nAborting...\n"
 #define MALLOC_ERROR_MSG "\nError: malloc failed at the %s's function.\nAborting...\n" 
 #define CALLOC_ERROR_MSG "\nError: calloc failed at the %s's function.\nAborting...\n"
+#define SET_LENGTH_ERROR "\nError: There's more elements inside the StaticQueue than the new length that you've specified, impossible set to this lenght.\nAborting...\n"
+#define REALLOC_ERROR_MSG "\nError: realloc failed at the %s function.\nAborting...\n"
 
 void createStaticQueue(staticQueue * const q, const int  nElem){
 
@@ -33,6 +35,7 @@ void createStaticQueue(staticQueue * const q, const int  nElem){
 	(*q)->qtElements = nElem+1;
 	(*q)->front = 0;
 	(*q)->rear = 0;
+	(*q)->currentSize = 0;
 }
 
 void destroyStaticQueue(staticQueue q){
@@ -54,6 +57,52 @@ bool staticQueueIsEmpty(staticQueue const q){
 bool staticQueueIsFull(staticQueue const q){
 
 	return ((q->rear + 1) == (q->front)) || (q->front == 0 && q->rear + 1 == q->qtElements);
+}
+
+void setStaticQueueLength(staticQueue q, int length)
+{
+	void **temp;
+	int i, count = 0;
+
+	if(length < q->currentSize)
+	{
+		printf(SET_LENGTH_ERROR);
+		destroyStaticQueue(q);
+		exit(1);
+	}
+
+	temp = calloc(length + 1 , sizeof(void *));
+
+	if(temp == NULL)
+	{
+	   printf(CALLOC_ERROR_MSG, "setStaticQueueLength");
+	   exit(0);
+	}
+
+	i = q->front;
+
+	while(i != q->rear)
+	{
+		if(i == q->qtElements)
+			i = 0;
+		
+		temp[count] = q->elem[i];
+		count++;
+		i++;
+	}
+	
+	if(q->elem[q->rear] != NULL)
+		free(q->elem[q->rear]);
+
+	free(q->elem);
+	
+	q->rear = count;
+	q->front = 0;
+
+	q->qtElements = length +1;
+	q->elem = temp;
+	
+
 }
 
 static void _enStaticQueue(staticQueue q,void * const elem, const unsigned int size){
@@ -86,6 +135,8 @@ static void _enStaticQueue(staticQueue q,void * const elem, const unsigned int s
 
 	else
 		q->rear++;
+
+	q->currentSize++;
 	
 }
 static void * _deStaticQueue(staticQueue q){
@@ -116,6 +167,8 @@ static void * _deStaticQueue(staticQueue q){
 	
 	else
 		q->front++;
+
+	q->currentSize--;
 
 	return elem;	
 }
