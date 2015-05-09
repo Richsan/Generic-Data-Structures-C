@@ -4,9 +4,6 @@
    Github: https://github.com/Richsan
 
 */
-#ifndef GENERICCBHEAP_H
-#define GENERICCBHEAP_H
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,5 +63,3 @@ typedef void (* _FUNC_PTRPOPBHEAPGET)(bHeap h, void * const guardVar, const unsi
 _FUNC_PTRPUSHBHEAP _getPTR_PushBHeap();
 _FUNC_PTRPOPBHEAP _getPTR_PopBHeap();
 _FUNC_PTRPOPBHEAPGET _getPTR_PopBHeapGet();
-
-#endif

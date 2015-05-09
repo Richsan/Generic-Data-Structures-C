@@ -5,8 +5,6 @@
 
 */
 
-#ifndef GENERICCSTATICQUEUE_H
-#define GENERICCSTATICQUEUE_H
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -54,5 +52,3 @@ typedef void   (*_FUNC_PTRDESTATICQUEUEGET)(staticQueue q, void * const elem, co
 _FUNC_PTRENSTATICQUEUE _getPTR_EnStaticQueue();
 _FUNC_PTRDESTATICQUEUE _getPTR_DeStaticQueue();
 _FUNC_PTRDESTATICQUEUEGET _getPTR_DeStaticQueueGet();
-
-#endif

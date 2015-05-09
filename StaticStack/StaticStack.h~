@@ -4,8 +4,8 @@
 	Github: https://github.com/Richsan
 
 */
-#ifndef GENERICCSTATICSTACK_H
-#define GENERICCSTATICSTACK_H
+#ifndef STATICSTACK_H
+#define STATICSTACK_H
 
 #include <stdlib.h>
 #include <stdio.h>
